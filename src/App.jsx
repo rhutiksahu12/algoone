@@ -38,7 +38,7 @@ function App() {
 
     const newData =  [...lowerHalf, ...upperHalf].sort((a, b) => a.strike - b.strike); // create new array combining both and sort them
     let dataWithSubrows= []
-      for (let i =0; i<newData.length; i+=2){
+      for (let i =0; i<newData.length-1; i+=2){
         const data  = {...newData[i], subRows:[ newData[i+1]]}
         // dataWithSubrows.push(newData[i].subRow = newData[i+1])
         dataWithSubrows.push(data)
@@ -71,7 +71,7 @@ function App() {
   return (
     <>
       <Container maxWidth={false} sx={{ height: '100vh', display: 'flex', flexDirection: 'column', padding: 2 }}>
-        <Box sx={{ width: 300 }}>
+        <Box sx={{ width: 600 }}>
           <Typography gutterBottom>Number of rows: {sliderValue}</Typography>
           <Box sx={{ display: 'flex', alignItems:'center', gap:2 }}>
             <Typography>0
@@ -83,10 +83,15 @@ function App() {
                 valueLabelDisplay="auto"
                 min={1}
                 max={data ? data.length : 100}
+                sx={{width:1/2}}
               />
               <Typography>{data.length}
               </Typography>
+
+              <Typography color='red'>Because of subrows, only even numbers can be rendered in slider</Typography>
           </Box>
+
+          
         </Box>
         <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
           <TableComponent data={filteredData} />
