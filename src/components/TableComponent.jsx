@@ -39,6 +39,7 @@ function TableComponent({ data }) {
             ],
             filterFn: (row, id, filterValues) => {
                 if (!filterValues.length) return true;
+                console.log(filterValues)
                 const value = row.getValue(id);
                 return filterValues.some(filter =>
                     (filter === 'in' && value > 0) || (filter === 'out' && value < 0)
@@ -54,7 +55,6 @@ function TableComponent({ data }) {
                     </div>
                 );
             },
-
         },
         {
             accessorKey: "percent_max_risk",

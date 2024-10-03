@@ -21,7 +21,7 @@ function App() {
     const sortedData = [...data].sort((a, b) => a.strike - b.strike);
     const pivotIndex = sortedData.findIndex(row => row.strike > 214.29);
 
-    let lowerHalf = sortedData.slice(0, pivotIndex);
+    let lowerHalf = sortedData.slice(0, pivotIndex).reverse();
     let upperHalf = sortedData.slice(pivotIndex);
 
     const halfCount = Math.floor(count / 2);
@@ -36,7 +36,7 @@ function App() {
       upperHalf = upperHalf.slice(0, count - lowerHalf.length);
     }
 
-    return [...lowerHalf, ...upperHalf].sort((a, b) => a.strike - b.strike);
+    return [...lowerHalf, ...upperHalf].sort((a, b) => a.strike - b.strike); // create new array combining both and sort them
   }, []);
 
   const filteredData = useMemo(() => {
