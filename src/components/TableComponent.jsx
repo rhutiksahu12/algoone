@@ -155,7 +155,10 @@ function TableComponent({ data }) {
         enableGlobalFilter: false,
         enableStickyHeader: true,
         enableStickyFooter: true,
+        enableExpanding: true,
         initialState: { showColumnFilters: true },
+
+        getSubRows: (originalRow) => originalRow.subRows,
 
         // defaultDisplayColumn: {
         //     minSize: 50
@@ -190,14 +193,11 @@ function TableComponent({ data }) {
             },
         },
 
-        muiTableBodyProps: {
+        muiTableBodyRowProps: ({ row }) => ({
             sx: {
-                //stripe the rows, make odd rows a darker color
-                '& tr:nth-of-type(odd) > td': {
-                    backgroundColor: '#f5f5f5',
-                },
+                backgroundColor: !!row.subRows.length ? 'yellow' : 'purple',
             },
-        },
+        }),
         muiTableHeadRowProps: {
             sx: {
                 backgroundColor: '#191f31',

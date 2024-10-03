@@ -36,8 +36,17 @@ function App() {
       upperHalf = upperHalf.slice(0, count - lowerHalf.length);
     }
 
-    return [...lowerHalf, ...upperHalf].sort((a, b) => a.strike - b.strike); // create new array combining both and sort them
+    const newData =  [...lowerHalf, ...upperHalf].sort((a, b) => a.strike - b.strike); // create new array combining both and sort them
+    let dataWithSubrows= []
+      for (let i =0; i<newData.length; i+=2){
+        const data  = {...newData[i], subRows:[ newData[i+1]]}
+        // dataWithSubrows.push(newData[i].subRow = newData[i+1])
+        dataWithSubrows.push(data)
+      }
+      console.log(dataWithSubrows)
+      return dataWithSubrows
   }, []);
+
 
   const filteredData = useMemo(() => {
     return data ? filterData(data, displayedRowCount) : [];
